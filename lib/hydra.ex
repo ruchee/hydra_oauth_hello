@@ -22,7 +22,7 @@ defmodule Hydra do
   end
 
   def authorize_url!(params \\ []) do
-    OAuth2.Client.authorize_url!(client(), params) <> "&state=" <> random_state(20)
+    OAuth2.Client.authorize_url!(client(), params) <> "&scope=openid+offline" <> "&state=" <> random_state(20)
   end
 
   def get_token!(params \\ [], _headers \\ []) do
