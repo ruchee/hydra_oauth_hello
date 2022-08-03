@@ -4,10 +4,12 @@ defmodule Google do
   use OAuth2.Strategy
 
   defp config do
-    [strategy: Google,
-     site: "https://accounts.google.com",
-     authorize_url: "/o/oauth2/auth",
-     token_url: "/o/oauth2/token"]
+    [
+      strategy: Google,
+      site: "https://accounts.google.com",
+      authorize_url: "/o/oauth2/auth",
+      token_url: "/o/oauth2/token"
+    ]
   end
 
   # Public API
@@ -23,7 +25,10 @@ defmodule Google do
   end
 
   def get_token!(params \\ [], headers \\ []) do
-    OAuth2.Client.get_token!(client(), Keyword.merge(params, client_secret: client().client_secret))
+    OAuth2.Client.get_token!(
+      client(),
+      Keyword.merge(params, client_secret: client().client_secret)
+    )
   end
 
   # Strategy Callbacks

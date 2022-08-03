@@ -4,10 +4,12 @@ defmodule Facebook do
   use OAuth2.Strategy
 
   defp config do
-    [strategy: Facebook,
-     site: "https://graph.facebook.com",
-     authorize_url: "https://www.facebook.com/dialog/oauth",
-     token_url: "/oauth/access_token"]
+    [
+      strategy: Facebook,
+      site: "https://graph.facebook.com",
+      authorize_url: "https://www.facebook.com/dialog/oauth",
+      token_url: "/oauth/access_token"
+    ]
   end
 
   # Public API

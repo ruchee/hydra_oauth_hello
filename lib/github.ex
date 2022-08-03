@@ -4,10 +4,12 @@ defmodule GitHub do
   use OAuth2.Strategy
 
   defp config do
-    [strategy: GitHub,
-     site: "https://api.github.com",
-     authorize_url: "https://github.com/login/oauth/authorize",
-     token_url: "https://github.com/login/oauth/access_token"]
+    [
+      strategy: GitHub,
+      site: "https://api.github.com",
+      authorize_url: "https://github.com/login/oauth/authorize",
+      token_url: "https://github.com/login/oauth/access_token"
+    ]
   end
 
   # Public API
@@ -23,7 +25,10 @@ defmodule GitHub do
   end
 
   def get_token!(params \\ [], headers \\ []) do
-    OAuth2.Client.get_token!(client(), Keyword.merge(params, client_secret: client().client_secret))
+    OAuth2.Client.get_token!(
+      client(),
+      Keyword.merge(params, client_secret: client().client_secret)
+    )
   end
 
   # Strategy Callbacks

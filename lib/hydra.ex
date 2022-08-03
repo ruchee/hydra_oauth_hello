@@ -22,7 +22,8 @@ defmodule Hydra do
   end
 
   def authorize_url!(params \\ []) do
-    OAuth2.Client.authorize_url!(client(), params) <> "&scope=openid+offline" <> "&state=" <> random_state(20)
+    OAuth2.Client.authorize_url!(client(), params) <>
+      "&scope=openid+offline" <> "&state=" <> random_state(20)
   end
 
   def get_token!(params \\ [], _headers \\ []) do
@@ -30,14 +31,15 @@ defmodule Hydra do
   end
 
   def get_user!(code) do
-    resp = try do
-      [code: code]
-      |> Hydra.get_token!()
-      |> OAuth2.Client.get!("/oauth/v2/user")
-    rescue
-      e ->
-        raise e
-    end
+    resp =
+      try do
+        [code: code]
+        |> Hydra.get_token!()
+        |> OAuth2.Client.get!("/oauth/v2/user")
+      rescue
+        e ->
+          raise e
+      end
 
     resp.body
   end
@@ -131,10 +133,10 @@ defmodule Hydra do
 
   defp random_state(len \\ 8) do
     symbols =
-            [?0..?9, ?a..?z, ?A..?Z]
-            |> Enum.map(&Enum.to_list/1)
-            |> Enum.concat()
-            |> Enum.filter(fn char -> char not in '1lI0O' end)
+      [?0..?9, ?a..?z, ?A..?Z]
+      |> Enum.map(&Enum.to_list/1)
+      |> Enum.concat()
+      |> Enum.filter(fn char -> char not in '1lI0O' end)
 
     symbols_count = Enum.count(symbols)
 
